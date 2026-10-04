@@ -1,0 +1,1276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Legalease | AI Powered Legal Document Generator</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --primary: #4f46e5;
+            --secondary: #7c3aed;
+            --dark: #111827;
+            --text: #374151;
+            --light: #f8fafc;
+            --white: #ffffff;
+            --border: #e5e7eb;
+            --success: #16a34a;
+        }
+
+        body {
+            background: var(--light);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* NAVBAR */
+
+        nav {
+            width: 100%;
+            background: var(--white);
+            border-bottom: 1px solid var(--border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            max-width: 1200px;
+            margin: auto;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .theme-btn {
+            border: none;
+            background: #eef2ff;
+            padding: 10px 13px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+
+        /* HERO */
+
+        .hero {
+            max-width: 1200px;
+            margin: auto;
+            padding: 90px 20px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            line-height: 1.1;
+            color: var(--dark);
+            margin-bottom: 20px;
+        }
+
+        .hero h1 span {
+            color: var(--primary);
+        }
+
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: #6b7280;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 13px 22px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .primary-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .primary-btn:hover {
+            background: #4338ca;
+        }
+
+        .secondary-btn {
+            background: white;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+
+        .hero-card {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.08);
+        }
+
+        .document-icon {
+            width: 80px;
+            height: 80px;
+            background: #eef2ff;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+
+        .hero-card h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        /* FEATURES */
+
+        .section {
+            max-width: 1200px;
+            margin: auto;
+            padding: 70px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .section-title h2 {
+            font-size: 35px;
+            color: var(--dark);
+        }
+
+        .section-title p {
+            color: #6b7280;
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .feature {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            border: 1px solid var(--border);
+            transition: 0.3s;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.07);
+        }
+
+        .feature-icon {
+            font-size: 32px;
+            margin-bottom: 15px;
+        }
+
+        .feature h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+        }
+
+        /* GENERATOR */
+
+        .generator {
+            background: white;
+            max-width: 1000px;
+            margin: auto;
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        select,
+        input,
+        textarea {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #d1d5db;
+            border-radius: 9px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        select:focus,
+        input:focus,
+        textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .generate-btn {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 15px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .generate-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* DOCUMENT */
+
+        .document-container {
+            margin-top: 35px;
+            display: none;
+        }
+
+        .document-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .document-toolbar h3 {
+            color: var(--dark);
+        }
+
+        .toolbar-buttons {
+            display: flex;
+            gap: 10px;
+        }
+
+        .small-btn {
+            border: none;
+            padding: 9px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: #eef2ff;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .document {
+            background: white;
+            min-height: 600px;
+            padding: 60px;
+            border: 1px solid #ddd;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            font-family: Georgia, serif;
+        }
+
+        .document h2 {
+            text-align: center;
+            margin-bottom: 35px;
+            color: #111827;
+        }
+
+        .document p {
+            margin-bottom: 18px;
+            text-align: justify;
+        }
+
+        .signature {
+            margin-top: 50px;
+        }
+
+        /* HOW IT WORKS */
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .step {
+            text-align: center;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--primary);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: auto auto 15px;
+            font-weight: bold;
+        }
+
+        /* DISCLAIMER */
+
+        .disclaimer {
+            max-width: 1000px;
+            margin: 30px auto;
+            padding: 20px;
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-radius: 12px;
+            color: #9a3412;
+            font-size: 14px;
+        }
+
+        /* FOOTER */
+
+        footer {
+            background: #111827;
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        footer h2 {
+            margin-bottom: 10px;
+        }
+
+        footer p {
+            color: #9ca3af;
+        }
+
+        /* DARK MODE */
+
+        body.dark {
+            background: #0f172a;
+            color: #cbd5e1;
+        }
+
+        body.dark nav,
+        body.dark .hero-card,
+        body.dark .feature,
+        body.dark .generator,
+        body.dark .step,
+        body.dark .document {
+            background: #1e293b;
+            border-color: #334155;
+        }
+
+        body.dark .hero h1,
+        body.dark .section-title h2,
+        body.dark .feature h3,
+        body.dark label,
+        body.dark .document-toolbar h3 {
+            color: white;
+        }
+
+        body.dark .hero p,
+        body.dark .section-title p {
+            color: #94a3b8;
+        }
+
+        body.dark .nav-links a {
+            color: #cbd5e1;
+        }
+
+        body.dark input,
+        body.dark textarea,
+        body.dark select {
+            background: #0f172a;
+            color: white;
+            border-color: #475569;
+        }
+
+        /* RESPONSIVE */
+
+        @media(max-width: 800px) {
+
+            .nav-links {
+                display: none;
+            }
+
+            .hero {
+                grid-template-columns: 1fr;
+                padding-top: 60px;
+            }
+
+            .hero h1 {
+                font-size: 40px;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .steps {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .document {
+                padding: 30px 20px;
+            }
+        }
+
+        @media(max-width: 500px) {
+
+            .steps {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .generator {
+                padding: 25px 18px;
+            }
+
+            .document-toolbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+        }
+
+        @media print {
+
+            nav,
+            .hero,
+            #features,
+            #how,
+            .disclaimer,
+            footer,
+            .generator > h2,
+            .generator > p,
+            .form-group,
+            .generate-btn,
+            .document-toolbar {
+                display: none !important;
+            }
+
+            .document-container {
+                display: block !important;
+            }
+
+            .document {
+                box-shadow: none;
+                border: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+
+<nav>
+    <div class="navbar">
+
+        <div class="logo">
+            Legal<span>ease</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#generator">Generator</a></li>
+            <li><a href="#how">How It Works</a></li>
+        </ul>
+
+        <button class="theme-btn" onclick="toggleTheme()">🌙</button>
+
+    </div>
+</nav>
+
+
+<!-- HERO -->
+
+<section class="hero" id="home">
+
+    <div>
+
+        <h1>
+            Create Legal Documents
+            <span>Smarter with AI.</span>
+        </h1>
+
+        <p>
+            Legalease is an AI-powered legal document generator
+            that helps users create structured legal documents
+            quickly and easily.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="#generator" class="btn primary-btn">
+                Generate Document
+            </a>
+
+            <a href="#how" class="btn secondary-btn">
+                Learn More
+            </a>
+        </div>
+
+    </div>
+
+
+    <div class="hero-card">
+
+        <div class="document-icon">
+            ⚖️
+        </div>
+
+        <h3>
+            AI-Powered Legal Assistance
+        </h3>
+
+        <p>
+            Select a document type, provide the required
+            information and generate a structured document
+            using Legalease.
+        </p>
+
+        <br>
+
+        <p>
+            <strong>✓ Simple</strong>
+            &nbsp;&nbsp;
+            <strong>✓ Fast</strong>
+            &nbsp;&nbsp;
+            <strong>✓ Accessible</strong>
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURES -->
+
+<section class="section" id="features">
+
+    <div class="section-title">
+
+        <h2>Powerful Features</h2>
+
+        <p>
+            Everything you need to create basic legal documents.
+        </p>
+
+    </div>
+
+
+    <div class="features">
+
+        <div class="feature">
+
+            <div class="feature-icon">🤖</div>
+
+            <h3>AI Document Generation</h3>
+
+            <p>
+                Generate structured legal document drafts
+                based on information entered by the user.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">📄</div>
+
+            <h3>Multiple Documents</h3>
+
+            <p>
+                Create agreements, notices, rental documents,
+                affidavits and other document templates.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">⚡</div>
+
+            <h3>Fast Generation</h3>
+
+            <p>
+                Generate a document draft within seconds
+                through an easy-to-use interface.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">🔒</div>
+
+            <h3>Privacy Focused</h3>
+
+            <p>
+                Designed with privacy and responsible handling
+                of user-provided information in mind.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">📥</div>
+
+            <h3>Download & Print</h3>
+
+            <p>
+                Copy, print or save the generated document
+                for further review and editing.
+            </p>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">📱</div>
+
+            <h3>Responsive Design</h3>
+
+            <p>
+                Use Legalease on desktop, tablet and mobile
+                devices.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- GENERATOR -->
+
+<section class="section" id="generator">
+
+    <div class="section-title">
+
+        <h2>AI Legal Document Generator</h2>
+
+        <p>
+            Enter the required information below.
+        </p>
+
+    </div>
+
+
+    <div class="generator">
+
+        <div class="form-group">
+
+            <label for="documentType">
+                Document Type
+            </label>
+
+            <select id="documentType">
+
+                <option value="rental">
+                    Rental Agreement
+                </option>
+
+                <option value="employment">
+                    Employment Agreement
+                </option>
+
+                <option value="nda">
+                    Non-Disclosure Agreement
+                </option>
+
+                <option value="affidavit">
+                    Affidavit
+                </option>
+
+                <option value="notice">
+                    Legal Notice
+                </option>
+
+                <option value="sale">
+                    Sale Agreement
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Party / Applicant Name
+            </label>
+
+            <input
+                type="text"
+                id="partyName"
+                placeholder="Enter name"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Address
+            </label>
+
+            <input
+                type="text"
+                id="address"
+                placeholder="Enter address"
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label>
+                Document Details
+            </label>
+
+            <textarea
+                id="details"
+                placeholder="Describe the purpose and important terms of the document..."
+            ></textarea>
+
+        </div>
+
+
+        <button
+            class="generate-btn"
+            onclick="generateDocument()"
+        >
+            🤖 Generate Legal Document
+        </button>
+
+
+        <!-- GENERATED DOCUMENT -->
+
+        <div
+            class="document-container"
+            id="documentContainer"
+        >
+
+            <div class="document-toolbar">
+
+                <h3>
+                    Generated Document
+                </h3>
+
+                <div class="toolbar-buttons">
+
+                    <button
+                        class="small-btn"
+                        onclick="copyDocument()"
+                    >
+                        📋 Copy
+                    </button>
+
+                    <button
+                        class="small-btn"
+                        onclick="window.print()"
+                    >
+                        🖨 Print
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="document"
+                id="documentOutput"
+            ></div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+    <div class="section-title">
+
+        <h2>How Legalease Works</h2>
+
+        <p>
+            Create a document in four simple steps.
+        </p>
+
+    </div>
+
+
+    <div class="steps">
+
+        <div class="step">
+
+            <div class="step-number">1</div>
+
+            <h3>Select</h3>
+
+            <p>
+                Choose the required legal document type.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">2</div>
+
+            <h3>Enter</h3>
+
+            <p>
+                Provide the names, address and document details.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">3</div>
+
+            <h3>Generate</h3>
+
+            <p>
+                Legalease creates a structured document draft.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">4</div>
+
+            <h3>Review</h3>
+
+            <p>
+                Review, edit and print the generated document.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- DISCLAIMER -->
+
+<div class="disclaimer">
+
+    <strong>⚠ Legal Disclaimer:</strong>
+
+    Legalease is an educational AI-powered document
+    generation project. Generated documents are drafts and
+    may require review, modification and verification by a
+    qualified legal professional before being used for any
+    legal purpose.
+
+</div>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <h2>⚖️ Legalease</h2>
+
+    <p>
+        AI Powered Legal Document Generator
+    </p>
+
+    <br>
+
+    <p>
+        © 2026 Legalease Project. All Rights Reserved.
+    </p>
+
+</footer>
+
+
+<script>
+
+    /* THEME */
+
+    function toggleTheme() {
+
+        document.body.classList.toggle("dark");
+
+        const button =
+            document.querySelector(".theme-btn");
+
+        if (document.body.classList.contains("dark")) {
+            button.innerHTML = "☀️";
+        } else {
+            button.innerHTML = "🌙";
+        }
+
+    }
+
+
+    /* DOCUMENT GENERATOR */
+
+    function generateDocument() {
+
+        const type =
+            document.getElementById("documentType").value;
+
+        const name =
+            document.getElementById("partyName").value;
+
+        const address =
+            document.getElementById("address").value;
+
+        const details =
+            document.getElementById("details").value;
+
+
+        if (!name || !address || !details) {
+
+            alert(
+                "Please fill in all required fields."
+            );
+
+            return;
+        }
+
+
+        let title = "";
+        let content = "";
+
+
+        if (type === "rental") {
+
+            title = "RENTAL AGREEMENT";
+
+            content = `
+                <p>
+                This Rental Agreement is made between
+                <strong>${name}</strong>, residing at
+                <strong>${address}</strong>, and the concerned
+                parties for the purpose of establishing the
+                terms and conditions of the rental arrangement.
+                </p>
+
+                <p>
+                The parties agree to comply with the mutually
+                agreed terms concerning the use, maintenance
+                and payment associated with the property.
+                </p>
+
+                <p>
+                <strong>Details:</strong>
+                ${details}
+                </p>
+
+                <p>
+                Both parties acknowledge that the information
+                contained in this document should be reviewed
+                and modified according to the applicable law
+                and actual circumstances.
+                </p>
+
+                <div class="signature">
+                    <p>Signature: __________________________</p>
+                    <p>Date: _______________________________</p>
+                </div>
+            `;
+
+        }
+
+
+        else if (type === "employment") {
+
+            title = "EMPLOYMENT AGREEMENT";
+
+            content = `
+                <p>
+                This Employment Agreement is prepared for
+                <strong>${name}</strong>, residing at
+                <strong>${address}</strong>.
+                </p>
+
+                <p>
+                The employee and employer agree to the terms
+                and conditions relating to employment,
+                responsibilities, remuneration and other
+                applicable conditions.
+                </p>
+
+                <p>
+                <strong>Employment Details:</strong>
+                ${details}
+                </p>
+
+                <p>
+                The final agreement should be reviewed by the
+                concerned parties and qualified professionals
+                before execution.
+                </p>
+
+                <div class="signature">
+                    <p>Employee Signature: __________________</p>
+                    <p>Employer Signature: _________________</p>
+                    <p>Date: _______________________________</p>
+                </div>
+            `;
+
+        }
+
+
+        else if (type === "nda") {
+
+            title = "NON-DISCLOSURE AGREEMENT";
+
+            content = `
+                <p>
+                This Non-Disclosure Agreement is prepared for
+                <strong>${name}</strong>, residing at
+                <strong>${address}</strong>.
+                </p>
+
+                <p>
+                The parties intend to protect confidential
+                information that may be shared during their
+                professional or business relationship.
+                </p>
+
+                <p>
+                <strong>Confidentiality Details:</strong>
+                ${details}
+                </p>
+
+                <p>
+                Confidential information should not be disclosed
+                or used except as permitted by the applicable
+                agreement and law.
+                </p>
+
+                <div class="signature">
+                    <p>Party Signature: _______________________</p>
+                    <p>Date: _______________________________</p>
+                </div>
+            `;
+
+        }
+
+
+        else if (type === "affidavit") {
+
+            title = "AFFIDAVIT";
+
+            content = `
+                <p>
+                I, <strong>${name}</strong>, residing at
+                <strong>${address}</strong>, do hereby state
+                and affirm the following information.
+                </p>
+
+                <p>
+                <strong>Statement:</strong>
+                ${details}
+                </p>
+
+                <p>
+                I declare that the information provided above
+                is stated to the best of my knowledge and
+                belief.
+                </p>
+
+                <div class="signature">
+                    <p>Deponent Signature: _________________</p>
+                    <p>Date: _______________________________</p>
+                    <p>Place: ______________________________</p>
+                </div>
+            `;
+
+        }
+
+
+        else if (type === "notice") {
+
+            title = "LEGAL NOTICE";
+
+            content = `
+                <p>
+                To the concerned party,
+                </p>
+
+                <p>
+                This notice is issued concerning
+                <strong>${name}</strong>, residing at
+                <strong>${address}</strong>.
+                </p>
+
+                <p>
+                <strong>Subject / Details:</strong>
+                ${details}
+                </p>
+
+                <p>
+                You are requested to take appropriate action
+                regarding the matter described above.
+                </p>
+
+                <div class="signature">
+                    <p>Name: ${name}</p>
+                    <p>Signature: __________________________</p>
+                    <p>Date: _______________________________</p>
+                </div>
+            `;
+
+        }
+
+
+        else if (type === "sale") {
+
+            title = "SALE AGREEMENT";
+
+            content = `
+                <p>
+                This Sale Agreement is prepared for
+                <strong>${name}</strong>, residing at
+                <strong>${address}</strong>.
+                </p>
+
+                <p>
+                The parties intend to record the terms relating
+                to the proposed sale and purchase transaction.
+                </p>
+
+                <p>
+                <strong>Transaction Details:</strong>
+                ${details}
+                </p>
+
+                <p>
+                The parties should verify the terms, applicable
+                laws, ownership information and other relevant
+                requirements before executing the final document.
+                </p>
+
+                <div class="signature">
+                    <p>Seller Signature: ______________________</p>
+                    <p>Buyer Signature: _______________________</p>
+                    <p>Date: _______________________________</p>
+                </div>
+            `;
+
+        }
+
+
+        document.getElementById("documentOutput").innerHTML =
+            `<h2>${title}</h2>${content}`;
+
+        document.getElementById("documentContainer").style.display =
+            "block";
+
+        document.getElementById("documentContainer")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* COPY DOCUMENT */
+
+    function copyDocument() {
+
+        const documentText =
+            document.getElementById("documentOutput")
+            .innerText;
+
+        navigator.clipboard.writeText(documentText);
+
+        alert(
+            "Document copied to clipboard!"
+        );
+
+    }
+
+</script>
+
+</body>
+</html>
